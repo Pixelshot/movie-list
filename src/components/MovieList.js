@@ -2,19 +2,19 @@ import React, { Component } from "react";
 
 class MovieList extends Component {
   state = {
-    title: "",
+    movies: [],
   };
 
   componentDidMount() {
-    // const URL = "http://localhost:3000/movies";
+    const URL = "http://localhost:5000/movies";
 
-    fetch("/db.json", {
+    fetch(URL, {
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => this.setState({ movies: data }))
       .catch((error) => console.log("error:", error));
   }
 
@@ -22,6 +22,11 @@ class MovieList extends Component {
     return (
       <>
         <h1>MovieList</h1>
+        <ul>
+          {this.state.movies.map((movie) => {
+            return <li key={movie.id}>{movie.title}</li>;
+          })}
+        </ul>
       </>
     );
   }
