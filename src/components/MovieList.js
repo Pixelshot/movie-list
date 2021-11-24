@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import Movie from './Movie';
 
 class MovieList extends Component {
   state = {
@@ -7,16 +8,16 @@ class MovieList extends Component {
   };
 
   componentDidMount() {
-    const URL = "http://localhost:5000/movies";
+    const URL = 'http://localhost:5000/movies';
 
     fetch(URL, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((res) => res.json())
       .then((data) => this.setState({ movies: data }))
-      .catch((error) => console.log("error:", error));
+      .catch((error) => console.log('error:', error));
   }
 
   getTitle = (title) => {
@@ -45,9 +46,7 @@ class MovieList extends Component {
           {selectedMovie === null ? (
             <h1>Select a title</h1>
           ) : (
-            <p>
-              <b>Selected movie: {selectedMovie}</b>
-            </p>
+            <Movie selectedMovie={selectedMovie} movies={movies} />
           )}
         </div>
       </>
