@@ -3,6 +3,7 @@ import React, { Component } from "react";
 class MovieList extends Component {
   state = {
     movies: [],
+    selectedMovie: null,
   };
 
   componentDidMount() {
@@ -18,15 +19,37 @@ class MovieList extends Component {
       .catch((error) => console.log("error:", error));
   }
 
+  getTitle = (title) => {
+    this.setState({
+      selectedMovie: title,
+    });
+  };
+
   render() {
+    const { movies, selectedMovie } = this.state;
     return (
       <>
-        <h1>MovieList</h1>
-        <ul>
-          {this.state.movies.map((movie) => {
-            return <li key={movie.id}>{movie.title}</li>;
+        <div>
+          {movies.map((movie) => {
+            return (
+              <div key={movie.id}>
+                <div>{movie.title}</div>
+                <button onClick={() => this.getTitle(movie.title)}>
+                  Select
+                </button>
+              </div>
+            );
           })}
-        </ul>
+        </div>
+        <div>
+          {selectedMovie === null ? (
+            <h1>Select a title</h1>
+          ) : (
+            <p>
+              <b>Selected movie: {selectedMovie}</b>
+            </p>
+          )}
+        </div>
       </>
     );
   }
