@@ -7,18 +7,32 @@ class MovieList extends Component {
     selectedMovie: null,
   };
 
-  componentDidMount() {
-    const URL = 'http://localhost:5000/movies';
+  async componentDidMount() {
+    try {
+      const URL = 'http://localhost:5000/movies';
 
-    fetch(URL, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => this.setState({ movies: data }))
-      .catch((error) => console.log('error:', error));
+      const response = await fetch(URL, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await response.json();
+      // console.log(data);
+      this.setState({ movies: data });
+    } catch (error) {
+      console.log('error: ', error);
+    }
   }
+  // componentDidMount() {
+  //   const URL = 'http://localhost:5000/movies';
+
+  //   fetch(URL, {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => this.setState({ movies: data }))
+  //     .catch((error) => console.log('error:', error));
+  // }
 
   getTitle = (title) => {
     this.setState({
