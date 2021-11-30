@@ -1,19 +1,17 @@
 import React from 'react';
 
 const Movie = ({ movies, selectedMovie }) => {
+  const movieDetail = movies.find((movie) => {
+    return movie.title === selectedMovie;
+  });
+  // console.log(movieDetail);
   return (
     <div>
-      {movies.map((movie) => {
-        if (movie.title === selectedMovie) {
-          return (
-            <div key={movie.id}>
-              <p>{movie.title}</p>
-              <p>{movie.year}</p>
-              <p>{movie.ratings}</p>
-            </div>
-          );
-        }
-      })}
+      <div key={movieDetail.id}>
+        <p>{movieDetail.title}</p>
+        <p>{movieDetail.year}</p>
+        <p>{movieDetail.ratings}</p>
+      </div>
     </div>
   );
 };
