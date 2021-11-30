@@ -1,9 +1,7 @@
 import React from 'react';
 
 const Movie = ({ movies, selectedMovie }) => {
-  const movieDetail = movies.find((movie) => {
-    return movie.title === selectedMovie;
-  });
+  const movieDetail = movies.find((movie) => movie.title === selectedMovie);
   // console.log(movieDetail);
   return (
     <div>
